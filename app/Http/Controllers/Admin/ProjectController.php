@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use PhpParser\Node\Stmt\Return_;
 
 class ProjectController extends Controller
@@ -56,6 +57,14 @@ class ProjectController extends Controller
    */
   public function update(Request $request, Project $project)
   {
+    //! Validazione
+    $request->validate([
+      'title' => ['required', Rule::unique('projects', 'title')->ignore($project)],
+      'description' => 'string',
+      'url' => 'url:http,https|nullable',
+      'img' => 'url:http,https|nullable',
+    ]);
+
     $data = $request->all();
     $project->update($data);
     return view('admin.projects.show', compact('project'));
