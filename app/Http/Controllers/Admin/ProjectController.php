@@ -37,9 +37,9 @@ class ProjectController extends Controller
     //! Validazione
     $request->validate([
       'title' => ['required', Rule::unique('projects', 'title')],
-      'description' => 'require|string',
       'url' => 'url:http,https|nullable',
       'img' => 'url:http,https|nullable',
+      'description' => 'required|string',
     ], [
       'title.required' => 'Il titolo è obbligatorio.',
       'url.url' => 'l\'url non ininzia con http o https.',
@@ -56,7 +56,7 @@ class ProjectController extends Controller
 
     $project->save();
 
-    return view('admin.projects.show', compact('project'));
+    return to_route('admin.projects.show', compact('project'))->with('type', 'success')->with('message', 'Il progetto è stato creato con successo!');
   }
 
   /**
@@ -96,7 +96,7 @@ class ProjectController extends Controller
 
     $data = $request->all();
     $project->update($data);
-    return view('admin.projects.show', compact('project'));
+    return to_route('admin.projects.show', compact('project'))->with('type', 'success')->with('message', 'Il progetto è stato modificato con successo!');
   }
 
   /**
@@ -105,6 +105,6 @@ class ProjectController extends Controller
   public function destroy(Project $project)
   {
     $project->delete();
-    return to_route('admin.projects.index');
+    return to_route('admin.projects.index')->with('type', 'success')->with('message', 'Il progetto è stato spostato nel cestino!');
   }
 }
