@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
 
 class ProjectController extends Controller
 {
@@ -14,7 +15,8 @@ class ProjectController extends Controller
    */
   public function index()
   {
-    //
+    $projects = Project::all();
+    return view('admin.projects.index', compact('projects'));
   }
 
   /**
