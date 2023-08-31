@@ -56,7 +56,9 @@ class ProjectController extends Controller
    */
   public function update(Request $request, Project $project)
   {
-    //
+    $data = $request->all();
+    $project->update($data);
+    return view('admin.projects.show', compact('project'));
   }
 
   /**
