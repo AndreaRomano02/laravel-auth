@@ -5,6 +5,7 @@
     <table class="table table-dark table-striped">
         <thead>
             <tr>
+                <th scope="col">#</th>
                 <th scope="col">Titolo</th>
                 <th scope="col">Descrizione</th>
                 <th scope="col"></th>
@@ -13,20 +14,23 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($projects as $project)
+            @forelse ($projects as $key => $project)
                 <tr>
+                    {{-- * Indice --}}
+                    <th class="align-middle">{{ $key + 1 }}</th>
+
                     {{-- * Titolo --}}
-                    <th>{{ $project->title }}</th>
+                    <th class="align-middle">{{ $project->title }}</th>
 
                     {{-- * Descrizione --}}
-                    <td>{{ $project->description }}</td>
+                    <td class="align-middle">{{ $project->getAbstract() }}</td>
 
                     {{-- * Url Immagine --}}
-                    <td>{{ $project->img }}</td>
+                    <td class="align-middle">{{ $project->img }}</td>
 
                     {{-- * Link GitHub --}}
-                    <td><a href="{{ $project->url }}">{{ $project->url }}</a></td>
-                    <td>
+                    <td class="align-middle"><a href="{{ $project->url }}">{{ $project->url }}</a></td>
+                    <td class="align-middle">
                         <div class="d-flex justify-content-end gap-2">
                             {{-- # SHOW --}}
                             <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-info"><i
@@ -37,7 +41,8 @@
                                     class="fas fa-pencil"></i></a>
 
                             {{-- # DELETE --}}
-                            <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+                            <form class="destroy-form" action="{{ route('admin.projects.destroy', $project) }}"
+                                method="POST" data-title="{{ $project->title }}">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
@@ -47,11 +52,15 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4">
+                    <td colspan="6" class="text-center">
                         <h1>NON CI SONO PROGETTI</h1>
                     </td>
                 </tr>
             @endforelse
         </tbody>
     </table>
+@endsection
+
+@section('scripts')
+    @vite('resources/js/destroy-form.js')
 @endsection

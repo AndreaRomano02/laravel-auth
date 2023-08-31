@@ -10,4 +10,9 @@ class Project extends Model
 {
   use HasFactory;
   use SoftDeletes;
+
+  public function getAbstract()
+  {
+    return substr($this->description, 0, 120) . '...';
+  }
 }
