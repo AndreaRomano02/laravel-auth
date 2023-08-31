@@ -37,9 +37,15 @@ class ProjectController extends Controller
     //! Validazione
     $request->validate([
       'title' => ['required', Rule::unique('projects', 'title')],
-      'description' => 'string',
+      'description' => 'require|string',
       'url' => 'url:http,https|nullable',
       'img' => 'url:http,https|nullable',
+    ], [
+      'title.required' => 'Il titolo è obbligatorio.',
+      'url.url' => 'l\'url non ininzia con http o https.',
+      'img.url' => 'l\'url dell\'immagine non ininzia con http o https.',
+      'description.required' => 'La descrizione è oblligatoria.',
+      'description.string' => 'La descrizione deve essere una stringa.',
     ]);
 
     $data = $request->all();
@@ -77,9 +83,15 @@ class ProjectController extends Controller
     //! Validazione
     $request->validate([
       'title' => ['required', Rule::unique('projects', 'title')->ignore($project)],
-      'description' => 'string',
+      'description' => 'required|string',
       'url' => 'url:http,https|nullable',
       'img' => 'url:http,https|nullable',
+    ], [
+      'title.required' => 'Il titolo è obbligatorio.',
+      'url.url' => 'l\'url non ininzia con http o https.',
+      'img.url' => 'l\'url dell\'immagine non ininzia con http o https.',
+      'description.required' => 'La descrizione è oblligatoria.',
+      'description.string' => 'La descrizione deve essere una stringa.',
     ]);
 
     $data = $request->all();
