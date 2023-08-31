@@ -12,7 +12,7 @@
         @include('includes.layout.navbar')
 
         {{-- # Main Content --}}
-        <main class="container">
+        <main class="container my-5">
             @yield('content')
         </main>
     </div>
