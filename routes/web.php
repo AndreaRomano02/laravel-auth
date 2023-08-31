@@ -16,14 +16,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//# GUEST HOME
 Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
 
-Route::get('/admin', [AdminHomeController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.home');
+//# ADMIN GROUP
+Route::prefix('/admin')->name('admin.')->middleware(['auth', 'verified'])->group(function () {
 
+  //# HOME
+  Route::get('/', [AdminHomeController::class, 'index'])->name('home');
+});
+
+//# PROFILE CONTROLLER
 Route::middleware('auth')->group(function () {
   Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
   Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//# AUTH
 require __DIR__ . '/auth.php';
