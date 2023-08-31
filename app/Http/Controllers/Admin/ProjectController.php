@@ -33,7 +33,15 @@ class ProjectController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $data = $request->all();
+
+    $project = new Project();
+
+    $project->fill($data);
+
+    $project->save();
+
+    return view('admin.projects.show', compact('project'));
   }
 
   /**
