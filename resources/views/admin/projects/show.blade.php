@@ -3,14 +3,37 @@
 @section('title', $project->title)
 
 @section('content')
-    <div class="card">
+    <div class="card p-3">
         @if ($project->img)
             <img src="{{ $project->img }}" class="card-img-top" alt="{{ $project->title }}">
         @endif
         <div class="card-body">
             <h5 class="card-title">{{ $project->title }}</h5>
             <p class="card-text">{{ $project->description }}</p>
-            <a href="{{ route('admin.projects.index') }}" class="btn btn-primary">Torna alla lista dei progetti</a>
+
+            <div class="d-flex justify-content-between">
+                {{-- # Torna alla Index --}}
+                <a href="{{ route('admin.projects.index') }}" class="btn btn-primary">Torna alla lista dei progetti</a>
+
+
+                <div class="d-flex gap-2">
+                    {{-- # EDIT --}}
+                    <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-warning"><i
+                            class="fas fa-pencil"></i> Modifica</a>
+
+                    {{-- # DELETE --}}
+                    <form class="destroy-form" action="{{ route('admin.projects.destroy', $project) }}" method="POST"
+                        data-title="{{ $project->title }}">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger"><i class="fas fa-trash"></i> Ellimina</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    @vite('resources/js/destroy-form.js')
 @endsection
