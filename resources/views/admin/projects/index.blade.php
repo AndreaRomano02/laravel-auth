@@ -33,7 +33,7 @@
                     <td class="align-middle">{{ $project->img }}</td>
 
                     {{-- * Link GitHub --}}
-                    <td class="align-middle"><a href="{{ $project->url }}" target="_blank">{{ $project->url }}</a></td>
+                    <td class="align-middle"><a href="{{ $project->url }}" target="_blank">Apri in GitHub</a></td>
                     <td class="align-middle">
                         <div class="d-flex justify-content-end gap-2">
                             {{-- # SHOW --}}
