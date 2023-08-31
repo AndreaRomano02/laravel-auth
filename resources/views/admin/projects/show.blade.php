@@ -10,6 +10,9 @@
         <div class="card-body">
             <h5 class="card-title">{{ $project->title }}</h5>
             <p class="card-text">{{ $project->description }}</p>
+            <p class="card-text mt-2 text-end"><strong>Link a GitHub: </strong><a href="{{ $project->url }}"
+                    target="_blank">{{ $project->url }}</a>
+            </p>
 
             <div class="d-flex justify-content-between">
                 {{-- # Torna alla Index --}}
