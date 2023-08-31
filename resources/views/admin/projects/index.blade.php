@@ -2,6 +2,10 @@
 @section('title', 'Projects')
 
 @section('content')
+    <header class="text-end my-5">
+        <a href="{{ route('admin.projects.create') }}" class="btn btn-success">Crea un progetto</a>
+    </header>
+
     <table class="table table-dark table-striped">
         <thead>
             <tr>
