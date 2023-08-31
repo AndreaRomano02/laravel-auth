@@ -47,7 +47,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4">
+                    <td colspan="5">
                         <h1>NON CI SONO PROGETTI</h1>
                     </td>
                 </tr>
