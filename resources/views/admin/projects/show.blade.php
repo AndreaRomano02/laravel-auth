@@ -25,12 +25,22 @@
                             class="fas fa-pencil"></i> Modifica</a>
 
                     {{-- # DELETE --}}
-                    <form class="destroy-form" action="{{ route('admin.projects.destroy', $project) }}" method="POST"
-                        data-title="{{ $project->title }}">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger"><i class="fas fa-trash"></i> Ellimina</button>
-                    </form>
+                    @if (!$project->trashed())
+                        <form class="destroy-form" action="{{ route('admin.projects.destroy', $project) }}" method="POST"
+                            data-title="{{ $project->title }}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger"><i class="fas fa-trash"></i> Sposta nel cestino</button>
+                        </form>
+                    @else
+                        <form class="destroy-form" action="{{ route('admin.projects.drop', $project->id) }}" method="POST"
+                            data-title="{{ $project->title }}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger"><i class="fas fa-trash"></i> Ellimina</button>
+                        </form>
+                    @endif
+
                 </div>
             </div>
         </div>
