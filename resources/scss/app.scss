@@ -1,1 +1,7 @@
-@import '~bootstrap/scss/bootstrap'
+@use 'layout/navbar';
+@use 'layout/home';
+@import '~bootstrap/scss/bootstrap';
+
+body{
+  display: block;
+}

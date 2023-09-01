@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Projects')
 
+@section('content-class', 'container my-5')
 @section('content')
     <header class="d-flex justify-content-between  my-5">
         <a href="{{ route('admin.projects.trash') }}" class="btn btn-secondary">vai al cestino</a>

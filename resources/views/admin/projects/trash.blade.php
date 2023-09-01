@@ -2,6 +2,7 @@
 
 @section('title', 'Cestino')
 
+@section('content-class', 'container my-5')
 @section('content')
     <h1>Cestino</h1>
     <div class="d-flex justify-content-between  my-4">

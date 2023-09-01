@@ -2,6 +2,7 @@
 
 @section('title', $project->title)
 
+@section('content-class', 'container my-5')
 @section('content')
     <div class="card p-3">
         @if ($project->img)
