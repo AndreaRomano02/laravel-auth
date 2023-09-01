@@ -2,7 +2,8 @@
 @section('title', 'Projects')
 
 @section('content')
-    <header class="text-end my-5">
+    <header class="d-flex justify-content-between  my-5">
+        <a href="{{ route('admin.projects.trash') }}" class="btn btn-secondary">vai al cestino</a>
         <a href="{{ route('admin.projects.create') }}" class="btn btn-success">Crea un progetto</a>
     </header>
 

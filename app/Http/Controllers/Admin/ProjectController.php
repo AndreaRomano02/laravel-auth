@@ -108,4 +108,30 @@ class ProjectController extends Controller
     $project->delete();
     return to_route('admin.projects.index')->with('type', 'success')->with('message', 'Il progetto è stato spostato nel cestino!');
   }
+
+  public function trash()
+  {
+    $projects = Project::onlyTrashed()->get();
+    return view('admin.projects.trash', compact('projects'));
+  }
+
+  public function restore(String $id)
+  {
+    $project = Project::onlyTrashed()->findOrFail($id);
+    $project->restore();
+    return to_route('admin.projects.trash')->with('type', 'success')->with('message', 'Il progetto è stato ripristinato!');
+  }
+
+  public function drop(String $id)
+  {
+    $project = Project::onlyTrashed()->findOrFail($id);
+    $project->forceDelete();
+    return to_route('admin.projects.trash')->with('type', 'success')->with('message', 'Il progetto è stato eliminato definitivamente!');
+  }
+
+  public function dropAll()
+  {
+    Project::onlyTrashed()->forceDelete();
+    return to_route('admin.projects.trash')->with('type', 'success')->with('message', 'Il tuo cestino è stato svuotato correttamente!');
+  }
 }
