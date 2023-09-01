@@ -20,7 +20,7 @@
 
 
         {{-- # Main Content --}}
-        <main class="container my-5">
+        <main class="@yield('content-class')">
             {{-- # Alert  --}}
             @if (session('message'))
                 <div class="alert alert-{{ session('type') ? session('type') : 'info' }} alert-dismissible fade show"
