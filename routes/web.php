@@ -27,6 +27,15 @@ Route::prefix('/admin')->name('admin.')->middleware(['auth', 'verified'])->group
   Route::get('/', [AdminHomeController::class, 'index'])->name('home');
 
   //# PROJECTS
+
+  //* TRASH
+
+  Route::get('/projects/trash', [ProjectController::class, 'trash'])->name('projects.trash');
+  Route::delete('/projects/dropAll', [ProjectController::class, 'dropAll'])->name('projects.dropAll');
+  Route::patch('/projects/{project}/restore', [ProjectController::class, 'restore'])->name('projects.restore');
+  Route::delete('/projects/{project}/drop', [ProjectController::class, 'drop'])->name('projects.drop');
+
+  //* RESOURCES
   Route::resource('/projects', ProjectController::class);
 });
 
