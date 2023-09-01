@@ -1,4 +1,4 @@
-<nav id="layout-nav" class="navbar navbar-expand-md navbar-light shadow-sm">
+<nav id="layout-nav" class="navbar navbar-expand-md  navbar-dark">
     <div class="container">
         <a class="navbar-brand" href="{{ route('guest.home') }}">
             <img class="logo" src="{{ asset('logo.png') }}" alt="LOGO">
@@ -13,12 +13,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
+                <li class="nav-item fs-5">
                     <a class="nav-link @if (request()->routeIs('guest.home')) active @endif"
                         href="{{ route('guest.home') }}">{{ __('Home') }}</a>
                 </li>
                 @auth
-                    <li class="nav-item">
+                    <li class="nav-item fs-5">
                         <a class="nav-link @if (request()->routeIs('admin.projects*')) active @endif"
                             href="{{ route('admin.projects.index') }}">Projects</a>
                     </li>
@@ -26,6 +26,20 @@
             </ul>
 
             <!-- Right Side Of Navbar -->
+
+            {{-- # Social --}}
+            <div class="social text-white d-flex gap-3">
+                <a href="https://www.linkedin.com/in/andrea-romano-b34939227/" target="_blank"><i
+                        class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/andrea_romano___/"target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/andrea.romano.773981/" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                </a>
+            </div>
+
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
