@@ -32,6 +32,8 @@
                 <a href="https://www.linkedin.com/in/andrea-romano-b34939227/" target="_blank"><i
                         class="fab fa-linkedin"></i>
                 </a>
+                <a href="https://github.com/AndreaRomano02" target="_blank"><i class="fab fa-github"></i>
+                </a>
                 <a href="https://www.instagram.com/andrea_romano___/"target="_blank">
                     <i class="fab fa-instagram"></i>
                 </a>

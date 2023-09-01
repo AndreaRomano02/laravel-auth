@@ -1,5 +1,6 @@
+@use '../vars' as *;
 #layout-nav {
-  background-color: #222222;
+  background-color: $black;
   .navbar-brand {
     height: 150px;
     margin-right: 40px;
