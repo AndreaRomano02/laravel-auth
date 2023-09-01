@@ -3,6 +3,12 @@
 
 <head>
     @include('includes.layout.head')
+
+    <style>
+        body {
+            display: none
+        }
+    </style>
 </head>
 
 <body>
