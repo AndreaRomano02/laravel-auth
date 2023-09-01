@@ -20,8 +20,8 @@
         <tbody>
             @forelse ($projects as $key => $project)
                 <tr>
-                    {{-- * Indice --}}
-                    <th class="align-middle">{{ $key + 1 }}</th>
+                    {{-- * ID --}}
+                    <th class="align-middle">{{ $project->id }}</th>
 
                     {{-- * Titolo --}}
                     <th class="align-middle">{{ $project->title }}</th>
@@ -63,6 +63,10 @@
             @endforelse
         </tbody>
     </table>
+
+    @if ($projects->hasPages())
+        {{ $projects->links() }}
+    @endif
 @endsection
 
 @section('scripts')
