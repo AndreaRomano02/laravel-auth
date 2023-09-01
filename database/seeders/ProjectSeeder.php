@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
+use Faker\Generator;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -11,13 +12,14 @@ class ProjectSeeder extends Seeder
   /**
    * Run the database seeds.
    */
-  public function run(): void
+  public function run(Generator $faker): void
   {
-    $project = new Project();
-    $project->title = 'Boolzap';
-    $project->url = 'https://github.com/AndreaRomano02/boolzap_api';
-    $project->description = 'Un\'applicazine web dove replica il designe e le funzionalità di boolzap.
-     L\' ho gestita con Vite e Vue in quanto Frontend, mentre lato Backend ho utilizato PHP plane, simulato come Database un file JSON. ';
-    $project->save();
+    for ($i = 0; $i < 50; $i++) {
+      $project = new Project();
+      $project->title = $faker->jobTitle();
+      $project->url = $faker->url;
+      $project->description = $faker->paragraphs(5, true);;
+      $project->save();
+    }
   }
 }
