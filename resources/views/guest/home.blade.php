@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div id="guest-home">
-        <div class="container">
+        <div class="container pb-5">
             <div class="row h-100">
 
                 <div class="col-8 py-4 left">
