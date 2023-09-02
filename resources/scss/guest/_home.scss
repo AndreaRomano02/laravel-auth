@@ -4,9 +4,7 @@
 position: relative;
 min-height: calc(100vh - 166px);
 
-    // background-color: lightgray;
-    // background:linear-gradient(180deg, #d3d3d3 5%, #ffffff 50%);
-    background:linear-gradient(180deg, #aeb2b2 10%, #e5faff 45%);
+    background:linear-gradient(180deg, $lightgray 10%, $lightblue 45%);
     .left {
         h1 {
             color: red;
@@ -25,6 +23,16 @@ min-height: calc(100vh - 166px);
             margin-top: 15px;
             font-family: "M PLUS 1 Code", monospace;
             font-size: 1.8rem;
+        }
+
+        h2{
+            font-family: 'Abduction2002', sans-serif;
+            font-size: 3rem;
+            background-color: $lightred;
+            display: inline-block;
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin-top: 80px;
         }
     }
 

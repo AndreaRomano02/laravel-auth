@@ -8,6 +8,8 @@
                     <h1>Hello World</h1>
                     <p>I'm Andrea Romano and I am Junior Full Stack Web Developer.</p>
 
+                    <h2>The last Projects</h2>
+
                     <ul class="last-projects p-0">
                         @forelse ($projects as $project)
                             <li class="project-title">
