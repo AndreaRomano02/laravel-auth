@@ -8,15 +8,17 @@
                     <h1>Hello World</h1>
                     <p>I'm Andrea Romano and I am Junior Full Stack Web Developer.</p>
 
-                    <div class="last-projects">
+                    <ul class="last-projects p-0">
                         @forelse ($projects as $project)
-                            <div class="project-title">
-                                <a href="#">{{ $project->title }}</a>
-                            </div>
+                            <li class="project-title">
+                                <a href="#">{{ $project->title }}
+                                    <span class="project-year">{{ $project->getYearCreated() }}</span>
+                                </a>
+                            </li>
                         @empty
                             <h2>Non ci sono progetti</h2>
                         @endforelse
-                    </div>
+                    </ul>
                 </div>
                 <div class="col-4 right">
                 </div>

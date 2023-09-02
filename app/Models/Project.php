@@ -17,4 +17,9 @@ class Project extends Model
   {
     return substr($this->description, 0, 120) . '...';
   }
+
+  public function getYearCreated()
+  {
+    return date('Y', strtotime($this->created_at));
+  }
 }
