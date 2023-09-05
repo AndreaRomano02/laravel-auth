@@ -1,8 +1,10 @@
 @if ($project->exists)
-    <form class="row" action="{{ route('admin.projects.update', $project) }}" method="POST" novalidate>
+    <form class="row" action="{{ route('admin.projects.update', $project) }}" method="POST"
+        enctype="multipart/form-data" novalidate>
         @method('PUT')
     @else
-        <form class="row" action="{{ route('admin.projects.store') }}" method="POST" novalidate>
+        <form class="row" action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data"
+            novalidate>
 @endif
 
 @csrf
@@ -29,17 +31,18 @@
 {{-- # Image --}}
 <div class="mb-3 col-11">
     <label for="img" class="form-label">Immagine</label>
-    <input type="url" class="form-control @error('img') is-invalid @enderror" name="img" id="img"
-        value="{{ old('img', $project->img) }}">
+    <input type="file" accept=".jpg, .png, .svg, jpeg" class="form-control @error('image') is-invalid @enderror"
+        name="image" id="img" value="{{ old('image', $project->getImagePath()) }}">
     <div class="invalid-feedback">
-        {{ $errors->first('img') }}
+        {{ $errors->first('image') }}
     </div>
 </div>
 {{-- # Image preview --}}
 <div class="col-1">
-    <img src="{{ old('img', 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=') }}"
+    <img src="{{ old('image', $project->getImagePath() ?? 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=') }}"
         alt="preview" class="img-fluid my-2" id="image-preview">
 </div>
+
 
 {{-- # Description --}}
 <div class="col-12 mb-3">

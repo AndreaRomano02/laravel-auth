@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use PhpParser\Node\Stmt\Return_;
 
@@ -39,17 +41,18 @@ class ProjectController extends Controller
     $request->validate([
       'title' => ['required', Rule::unique('projects', 'title')],
       'url' => 'url:http,https|nullable',
-      'img' => 'url:http,https|nullable',
+      'image' => 'image|nullable',
       'description' => 'required|string',
     ], [
       'title.required' => 'Il titolo è obbligatorio.',
       'url.url' => 'l\'url non ininzia con http o https.',
-      'img.url' => 'l\'url dell\'immagine non ininzia con http o https.',
+      'image.image' => 'Il file non è un immagine.',
       'description.required' => 'La descrizione è oblligatoria.',
       'description.string' => 'La descrizione deve essere una stringa.',
     ]);
 
     $data = $request->all();
+    if (Arr::exists($data, 'image')) $data['image'] = Storage::putfile('project_image', $data['image']);
 
     $project = new Project();
 
@@ -87,16 +90,22 @@ class ProjectController extends Controller
       'title' => ['required', Rule::unique('projects', 'title')->ignore($project)],
       'description' => 'required|string',
       'url' => 'url:http,https|nullable',
-      'img' => 'url:http,https|nullable',
+      'image' => 'image|nullable',
     ], [
       'title.required' => 'Il titolo è obbligatorio.',
       'url.url' => 'l\'url non ininzia con http o https.',
-      'img.url' => 'l\'url dell\'immagine non ininzia con http o https.',
+      'image.image' => 'Il file non è un immagine.',
       'description.required' => 'La descrizione è oblligatoria.',
       'description.string' => 'La descrizione deve essere una stringa.',
     ]);
 
     $data = $request->all();
+
+    if (Arr::exists($data, 'image')) {
+      if ($project->image) Storage::delete($project->image);
+      $data['image'] = Storage::putfile('project_image', $data['image']);
+    }
+
     $project->update($data);
     return to_route('admin.projects.show', compact('project'))->with('type', 'success')->with('message', 'Il progetto è stato modificato con successo!');
   }
@@ -126,6 +135,7 @@ class ProjectController extends Controller
   public function drop(String $id)
   {
     $project = Project::onlyTrashed()->findOrFail($id);
+    if ($project->image) Storage::delete($project->image);
     $project->forceDelete();
     return to_route('admin.projects.trash')->with('type', 'success')->with('message', 'Il progetto è stato eliminato definitivamente!');
   }

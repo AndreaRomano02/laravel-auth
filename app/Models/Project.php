@@ -11,7 +11,7 @@ class Project extends Model
   use HasFactory;
   use SoftDeletes;
 
-  protected $fillable = ['title', 'img', 'description', 'url'];
+  protected $fillable = ['title', 'image', 'description', 'url'];
 
   public function getAbstract()
   {
@@ -21,5 +21,10 @@ class Project extends Model
   public function getYearCreated()
   {
     return date('Y', strtotime($this->created_at));
+  }
+
+  public function getImagePath()
+  {
+    return asset('storage/' . $this->image);
   }
 }
