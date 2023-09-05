@@ -6,6 +6,7 @@
 @endif
 
 @csrf
+{{-- # TITLE --}}
 <div class="mb-3 col-6">
     <label for="title" class="form-label">Titolo</label>
     <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title"
@@ -14,6 +15,8 @@
         {{ $errors->first('title') }}
     </div>
 </div>
+
+{{-- # URL --}}
 <div class="mb-3 col-6">
     <label for="url" class="form-label">URL</label>
     <input type="url" class="form-control @error('url') is-invalid @enderror" name="url" id="url"
@@ -22,7 +25,9 @@
         {{ $errors->first('url') }}
     </div>
 </div>
-<div class="mb-3 col-12">
+
+{{-- # Image --}}
+<div class="mb-3 col-11">
     <label for="img" class="form-label">Immagine</label>
     <input type="url" class="form-control @error('img') is-invalid @enderror" name="img" id="img"
         value="{{ old('img', $project->img) }}">
@@ -30,6 +35,13 @@
         {{ $errors->first('img') }}
     </div>
 </div>
+{{-- # Image preview --}}
+<div class="col-1">
+    <img src="{{ old('img', 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=') }}"
+        alt="preview" class="img-fluid my-2" id="image-preview">
+</div>
+
+{{-- # Description --}}
 <div class="col-12 mb-3">
     <label for="description" class="form-label @error('description') is-invalid @enderror">Descrizione</label>
     <textarea class="form-control" name="description" id="description" rows="5">{{ old('description', $project->description) }}</textarea>
@@ -43,3 +55,7 @@
     <button class="btn btn-success"><i class="fas fa-floppy-disk me-2"></i>Salva</button>
 </div>
 </form>
+
+@section('scripts')
+    @Vite('resources/js/image-prev.js')
+@endsection
